@@ -36,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String _emotion = "Sad";
 
-  DateTime setSleepTime = new DateTime(2020, 11, 14, 14);
-  DateTime setWakeTime = new DateTime(2020, 11, 14, 23);
+  DateTime setSleepTime = new DateTime(2020, 11, 14, TimeOfDay.now().hour,TimeOfDay.now().minute);
+  DateTime setWakeTime = new DateTime(2020, 11, 14, TimeOfDay.now().hour+6 ,TimeOfDay.now().minute);
 
   void _updateEmotion() {
     setState(() {
@@ -115,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 selectTime: (value) {
                   final DateTime nowE = new DateTime(setSleepTime.year, setSleepTime.month, setSleepTime.day, value.hour, value.minute);
                   setSleepTime = nowE ;
+                  setState(() {});
                 },
               ),
             ),
@@ -126,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 selectTime: (value) {
                   final DateTime nowE = new DateTime(setWakeTime.year, setWakeTime.month, setWakeTime.day, value.hour, value.minute);
                   setWakeTime = nowE ;
+                  setState(() {});
                 },
               ),
             )
