@@ -1,7 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-void main() {
-  runApp(MyApp());
+//const myTask = "checkTime";
+bool _timeSet = false;
+
+// Range from 0 to 2;
+// Sad is 0, No emotion is 1, Happy is 2;
+int _emotionState = 2;
+String _emotion = "Sad";
+AssetImage _emotionImage = _happy;
+Color _emotionColor = _happyColor;
+
+AssetImage _happy = AssetImage('assets/images/happy.png');
+AssetImage _sad = AssetImage('assets/images/sad.png');
+AssetImage _neutral = AssetImage('assets/images/neutral.png');
+Color _happyColor = Colors.green;
+Color _neutralColor = Colors.blue;
+Color _sadColor = Colors.red;
+
+DateTime _setSleepTime = new DateTime(2020, 11, 14, 14);
+DateTime _setWakeTime = new DateTime(2020, 11, 14, 23);
+
+void update() {
+  // Time comparison:
+  // DateTime currentTime = new DateTime.now();
+  // if (currentTime.isAfter(_setSleepTime) &&
+  //     currentTime.isBefore(_setWakeTime)) {
+  //   _emotion_state--;
+  // } else if (currentTime.isAfter(_setWakeTime) &&
+  //     currentTime.isBefore(_setSleepTime)) {
+  //   _emotion_state++;
+  // }
+  _emotionState++;
+  if (_emotionState > 2) {
+    _emotionState = 0;
+  }
+  switch (_emotionState) {
+    case 0:
+      {
+        _emotion = "Sad";
+        _emotionImage = _sad;
+        _emotionColor = _sadColor;
+      }
+      break;
+
+    case 1:
+      {
+        _emotion = "Neutral";
+        _emotionImage = _neutral;
+        _emotionColor = _neutralColor;
+      }
+      break;
+
+    case 2:
+      {
+        _emotion = "Happy";
+        _emotionImage = _happy;
+        _emotionColor = _happyColor;
+      }
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -11,7 +69,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Wink',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: _emotionColor,
       ),
       home: MyHomePage(title: 'Wink Home'),
     );
@@ -28,82 +86,154 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Range from 0 to 2;
-  // Sad is 0, No emotion is 1, Happy is 2;
-  int _emotion_state = 2;
+  @override
+  void initState() {
+    super.initState();
+    _getTimeSet();
+    _getEmotionState();
+  }
 
-  String _emotion = "Sad";
+  Future<bool> _getTimeSet() async {
+    final prefs = await SharedPreferences.getInstance();
+    final timeHasBeenSet = prefs.getBool('timeSet');
+    if (timeHasBeenSet != null) {
+      return timeHasBeenSet;
+    } else {
+      return false;
+    }
+  }
 
-  DateTime setSleepTime = new DateTime(2020, 11, 14, 14);
-  DateTime setWakeTime = new DateTime(2020, 11, 14, 23);
+  Future<int> _getEmotionState() async {
+    final prefs = await SharedPreferences.getInstance();
+    final emotionState = prefs.getInt('emotionState');
+    if (emotionState != null) {
+      return emotionState;
+    } else {
+      return 0;
+    }
+  }
 
-  void _updateEmotion() {
+  Future<void> updateSharedPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    print(_timeSet);
+    print(_emotionState);
+    await prefs.setBool('timeSet', _timeSet);
+    await prefs.setInt('emotionState', _emotionState);
+  }
+
+  void setTime() {
     setState(() {
-      // Time comparison:
-      // DateTime currentTime = new DateTime.now();
-      // if (currentTime.isAfter(setSleepTime) &&
-      //     currentTime.isBefore(setWakeTime)) {
-      //   _emotion_state--;
-      // } else if (currentTime.isAfter(setWakeTime) &&
-      //     currentTime.isBefore(setSleepTime)) {
-      //   _emotion_state++;
-      // }
-      _emotion_state++;
-      if (_emotion_state > 2) {
-        _emotion_state = 0;
-      }
-      switch (_emotion_state) {
-        case 0:
-          {
-            _emotion = "Sad";
-          }
-          break;
-
-        case 1:
-          {
-            _emotion = "Neutral";
-          }
-          break;
-
-        case 2:
-          {
-            _emotion = "Happy";
-          }
-      }
+      update();
     });
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(
+  //       title: Text(widget.title),
+  //     ),
+  //     body: Center(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: <Widget>[
+  //           Text(
+  //             'Current Emotion:',
+  //           ),
+  //           Text(
+  //             '$_emotion',
+  //             style: Theme.of(context).textTheme.headline4,
+  //           ),
+  //         ],
+  //       ), // This trailing comma makes auto-formatting nicer for build methods.
+  //     ),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Current Emotion:',
+      body: new Column(
+        children: [
+          new Container(
+            color: _emotionColor,
+            height: 350.0,
+            alignment: Alignment.center,
+            child: new Column(
+              children: [
+                new Container(
+                  margin: EdgeInsets.symmetric(vertical: 50.0),
+                  height: 200.0,
+                  width: 200.0,
+                  decoration: new BoxDecoration(
+                      image: DecorationImage(
+                          image: _emotionImage, fit: BoxFit.fill),
+                      shape: BoxShape.circle),
+                ),
+                new Container(
+                  child: new Text(
+                    'Current Emotion: $_emotion',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0,
+                        color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_emotion',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+          new Container(
+            margin: EdgeInsets.symmetric(vertical: 50.0),
+            child: new Column(
+              children: [
+                Text(
+                  'You\'ve used your device for 5 hours after bedtime.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0,
+                      color: Colors.black),
+                ),
+                SizedBox(height: 50.0),
+                Text(
+                  'Current bedtime: ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0,
+                      color: Colors.black),
+                ),
+                SizedBox(height: 50.0),
+                Text(
+                  'Current wake up time: ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25.0,
+                      color: Colors.black),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _updateEmotion,
-        tooltip: 'Update Emotion',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: setTime,
+        child: Text('Update'),
+        backgroundColor: _emotionColor,
+      ),
     );
   }
+}
+
+void main() {
+  runApp(MyApp());
 }
