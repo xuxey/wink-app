@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+# Wink
 
-You can use the [editor on GitHub](https://github.com/xuxey/wink-app/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Hacking Illini project for OHI/O 2020.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Wink is an app designed to help users develop good sleeping and working habits via gamification.
 
-### Markdown
+## So, how does it work?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Wink is extremely simple! Each user gets an (adorable) virtual pet and is tasked with the responsibility of looking after it.
 
-```markdown
-Syntax highlighted code block
+The pet gets happier and healthier if the user does not use their phone during the designated sleeping/working hours.
+Alternatively, it gets incrementally unhappy and uncomfortable if the user is on their phone during the no-no times.
 
-# Header 1
-## Header 2
-### Header 3
+![Screenshot of the Landing Page](https://cdn.discordapp.com/attachments/777061200349495336/777589502977114163/Screenshot_20201115-231240.jpg)
 
-- Bulleted
-- List
+## Toolchain
 
-1. Numbered
-2. List
+- Dart/Flutter
+- Developed with <3 using Android Studio
 
-**Bold** and _Italic_ and `Code` text
+## Contributors
 
-[Link](url) and ![Image](src)
-```
+- [Soham](https://github.com/xuxey)
+- [Vinodh](https://github.com/vinodhn)
+- [Albert](https://github.com/az85252)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xuxey/wink-app/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
