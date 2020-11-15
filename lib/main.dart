@@ -103,13 +103,18 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_emotion',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(
+              '$setSleepTime',
+              style: Theme.of(context).textTheme.headline4,
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SleepTimeForm(
                 labelText: 'Select sleep time',
-                selectedTime: TimeOfDay.now(),
+                selectedTime: TimeOfDay(hour: setSleepTime.hour, minute: setSleepTime.minute),
                 selectTime: (value) {
-                  setSleepTime = value as DateTime;
+                  final DateTime nowE = new DateTime(setSleepTime.year, setSleepTime.month, setSleepTime.day, value.hour, value.minute);
+                  setSleepTime = nowE ;
                 },
               ),
             ),
@@ -117,9 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(16.0),
               child: SleepTimeForm(
                 labelText: 'Select wake time',
-                selectedTime: TimeOfDay.now(),
+                selectedTime: TimeOfDay(hour: setWakeTime.hour, minute: setWakeTime.minute),
                 selectTime: (value) {
-                  setWakeTime = value as DateTime;
+                  final DateTime nowE = new DateTime(setWakeTime.year, setWakeTime.month, setWakeTime.day, value.hour, value.minute);
+                  setWakeTime = nowE ;
                 },
               ),
             )
