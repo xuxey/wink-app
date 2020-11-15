@@ -1,16 +1,26 @@
 # wink
 
-Productivity app
+Hacking Illini project for OHI/O 2020.
 
-## Getting Started
+Wink is an app designed to help users develop good sleeping and working habits via gamification.
 
-This project is a starting point for a Flutter application.
+## So, how does it work?
 
-A few resources to get you started if this is your first Flutter project:
+Wink is extremely simple! Each user gets an (adorable) virtual pet and is tasked with the responsibility of looking after it.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+The pet gets happier and healthier if the user does not use their phone during the designated sleeping/working hours.
+Alternatively, it gets incrementally unhappy and uncomfortable if the user is on their phone during the no-no times.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot of the Landing Page](https://cdn.discordapp.com/attachments/777061200349495336/777589502977114163/Screenshot_20201115-231240.jpg)
+
+## Toolchain
+
+- Dart/Flutter
+- Developed with <3 using Android Studio
+
+## Contributors
+
+- [Soham](https://github.com/xuxey)
+- [Vinodh](https://github.com/vinodhn)
+- [Albert](https://github.com/az85252)
+
