@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wink/sleepTimeForm.dart';
 
@@ -90,6 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            CachedNetworkImage(
+              placeholder: (context, url) => CircularProgressIndicator(),
+              imageUrl:
+                  'https://p.kindpng.com/picc/s/377-3779394_pixel-art-easy-cute-transparent-cartoons-cute-pixel.png',
+            ),
             Text(
               'Current Emotion:',
             ),
@@ -97,19 +103,25 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_emotion',
               style: Theme.of(context).textTheme.headline4,
             ),
-            SleepTimeForm(
-              labelText: 'Select sleep time',
-              selectedTime: TimeOfDay.now(),
-              selectTime: (value) {
-                setSleepTime = value as DateTime;
-              },
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SleepTimeForm(
+                labelText: 'Select sleep time',
+                selectedTime: TimeOfDay.now(),
+                selectTime: (value) {
+                  setSleepTime = value as DateTime;
+                },
+              ),
             ),
-            SleepTimeForm(
-              labelText: 'Select wake time',
-              selectedTime: TimeOfDay.now(),
-              selectTime: (value) {
-                setWakeTime = value as DateTime;
-              },
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SleepTimeForm(
+                labelText: 'Select wake time',
+                selectedTime: TimeOfDay.now(),
+                selectTime: (value) {
+                  setWakeTime = value as DateTime;
+                },
+              ),
             )
           ],
         ),

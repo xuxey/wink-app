@@ -61,6 +61,10 @@ class _InputDropdown extends StatelessWidget {
       child: new InputDecorator(
         decoration: new InputDecoration(
           labelText: labelText,
+          labelStyle: TextStyle(
+            fontSize: 24.0,
+            color: Colors.black,
+          ),
         ),
         baseStyle: valueStyle,
         child: new Row(
