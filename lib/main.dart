@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:wink/screenStateCheck.dart';
 import 'package:wink/sleepTimeForm.dart';
 
 void main() {
@@ -83,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    new ScreenStateChecker().startListening();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -94,17 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
             CachedNetworkImage(
               placeholder: (context, url) => CircularProgressIndicator(),
               imageUrl:
-                  'https://p.kindpng.com/picc/s/377-3779394_pixel-art-easy-cute-transparent-cartoons-cute-pixel.png',
+              'https://p.kindpng.com/picc/s/377-3779394_pixel-art-easy-cute-transparent-cartoons-cute-pixel.png',
             ),
             Text(
               'Current Emotion:',
             ),
             Text(
               '$_emotion',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              '$setSleepTime',
               style: Theme.of(context).textTheme.headline4,
             ),
             Padding(
