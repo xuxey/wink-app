@@ -11,7 +11,7 @@ Wink is extremely simple! Each user gets an (adorable) virtual pet and is tasked
 The pet gets happier and healthier if the user does not use their phone during the designated sleeping/working hours.
 Alternatively, it gets incrementally unhappy and uncomfortable if the user is on their phone during the no-no times.
 
-<img src="https://cdn.discordapp.com/attachments/777061200349495336/777589502977114163/Screenshot_20201115-231240.jpg" width="100"/>
+<img src="https://cdn.discordapp.com/attachments/777061200349495336/777589502977114163/Screenshot_20201115-231240.jpg" width="350"/>
 
 ## Toolchain
 
