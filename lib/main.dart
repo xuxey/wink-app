@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wink/sleepTimeForm.dart';
 
 void main() {
   runApp(MyApp());
@@ -96,6 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_emotion',
               style: Theme.of(context).textTheme.headline4,
             ),
+            SleepTimeForm(
+              labelText: 'Select sleep time',
+              selectedTime: TimeOfDay.now(),
+              selectTime: (value) {
+                setSleepTime = value as DateTime;
+              },
+            ),
+            SleepTimeForm(
+              labelText: 'Select wake time',
+              selectedTime: TimeOfDay.now(),
+              selectTime: (value) {
+                setWakeTime = value as DateTime;
+              },
+            )
           ],
         ),
       ),
@@ -103,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _updateEmotion,
         tooltip: 'Update Emotion',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
